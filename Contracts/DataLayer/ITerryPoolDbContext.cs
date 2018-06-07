@@ -6,5 +6,7 @@ namespace Contracts.DataLayer
     public interface ITerryPoolDbContext
     {
         DbSet<User> Users { get; set; }
+
+        int SaveChanges();
     }
 }
