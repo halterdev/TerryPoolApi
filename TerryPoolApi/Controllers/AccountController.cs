@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TerryPoolApi.Controllers
 {
@@ -38,9 +39,10 @@ namespace TerryPoolApi.Controllers
 
         [Route("register")]
         [HttpPost]
-        public ActionResult<UserDto> Register(UserDto user)
+        public async Task<UserDto> Register(UserDto user)
         {
-            _userLogic.Register(user);
+            await _userLogic.Register(user);
+
             return user;
         }
 

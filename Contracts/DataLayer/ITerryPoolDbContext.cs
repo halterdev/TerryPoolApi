@@ -1,5 +1,6 @@
 ﻿using Entities.Users;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Contracts.DataLayer
 {
@@ -7,6 +8,6 @@ namespace Contracts.DataLayer
     {
         DbSet<User> Users { get; set; }
 
-        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

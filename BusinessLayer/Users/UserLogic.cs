@@ -1,6 +1,7 @@
 ﻿using Contracts.BusinessLayer.Users;
 using Contracts.DataLayer.Users;
 using Entities.Users;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Users
 {
@@ -13,11 +14,11 @@ namespace BusinessLayer.Users
             _userRepository = userRepository;
         }
 
-        public UserDto Register(UserDto newUser)
+        public async Task<UserDto> Register(UserDto newUser)
         {
             User user = ConvertUserDtoToUser(newUser);
 
-            _userRepository.Insert(user);
+            await _userRepository.InsertAsync(user);
 
             newUser.Id = user.Id;
 

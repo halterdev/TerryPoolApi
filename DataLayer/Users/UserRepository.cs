@@ -1,6 +1,7 @@
 ﻿using Contracts.DataLayer;
 using Contracts.DataLayer.Users;
 using Entities.Users;
+using System.Threading.Tasks;
 
 namespace DataLayer.Users
 {
@@ -13,18 +14,13 @@ namespace DataLayer.Users
             _database = database;
         }
 
-        public int Insert(User user)
+        public async Task<User> InsertAsync(User user)
         {
             _database.Users.Add(user);
 
-            SaveChanges();
+            await _database.SaveChangesAsync();
 
-            return user.Id;
-        }
-
-        private void SaveChanges()
-        {
-            _database.SaveChanges();
+            return user;
         }
     }
 }
