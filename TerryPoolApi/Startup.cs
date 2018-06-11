@@ -64,7 +64,7 @@ namespace TerryPoolApi
 
             services.AddTransient<ITerryPoolDbContext, TerryPoolDbContext>();
 
-            services.AddTransient<IUserLogic, UserLogic>();
+            services.AddTransient<IUserManagementService, UserManagementService>();
 
             services.AddTransient<IUserRepository, UserRepository>();
         }

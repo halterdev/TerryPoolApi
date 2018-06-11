@@ -12,11 +12,11 @@ namespace TerryPoolApi.Controllers
     {
         public object Endoding { get; private set; }
 
-        private IUserLogic _userLogic;
+        private IUserManagementService _userManagementService;
 
-        public AccountController(IUserLogic userLogic)
+        public AccountController(IUserManagementService userLogic)
         {
-            _userLogic = userLogic;
+            _userManagementService = userLogic;
         }
 
         //[Route("/token")]
@@ -34,9 +34,9 @@ namespace TerryPoolApi.Controllers
         [Authorize]
         public async Task<UserDto> Register(UserDto user)
         {
-            await _userLogic.Register(user);
+            await _userManagementService.Register(user);
 
-            user.Token = _userLogic.GenerateToken(user.Email);
+            user.Token = _userManagementService.GenerateToken(user.Email);
 
             return user;
         }

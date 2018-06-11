@@ -4,17 +4,16 @@ using Entities.Users;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLayer.Users
 {
-    public class UserLogic : IUserLogic
+    public class UserManagementService : IUserManagementService
     {
         private IUserRepository _userRepository;
 
-        public UserLogic(IUserRepository userRepository)
+        public UserManagementService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

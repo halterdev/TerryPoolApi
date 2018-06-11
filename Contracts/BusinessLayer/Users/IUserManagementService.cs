@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Contracts.BusinessLayer.Users
 {
-    public interface IUserLogic
+    public interface IUserManagementService
     {
         Task<UserDto> Register(UserDto newUser);
 
