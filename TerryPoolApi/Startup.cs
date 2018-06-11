@@ -4,6 +4,7 @@ using Contracts.BusinessLayer.Users;
 using Contracts.DataLayer;
 using Contracts.DataLayer.Users;
 using DataLayer.Users;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,21 @@ namespace TerryPoolApi
         {
             services.AddCors();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "http://localhost:4200",
+                    ValidAudience = "http://localhost:4200",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("auT68Dff3RtcHe34"))
+                };
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options =>
                 {
@@ -45,30 +61,6 @@ namespace TerryPoolApi
             services.AddDbContext<TerryPoolDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("TerryPoolApi")));
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = "JwtBearer";
-                options.DefaultChallengeScheme = "JwtBearer";
-            })
-            .AddJwtBearer("JwtBearer", jwtBearerOptions =>
-            {
-                jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your secret goes here")),
-
-                    ValidateIssuer = true,
-                    ValidIssuer = "The name of the issuer",
-
-                    ValidateAudience = true,
-                    ValidAudience = "The name of the audience",
-
-                    ValidateLifetime = true, //validate the expiration and not before values in the token
-
-                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
-                };
-            });
 
             services.AddTransient<ITerryPoolDbContext, TerryPoolDbContext>();
 

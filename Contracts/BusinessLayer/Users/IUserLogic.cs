@@ -6,5 +6,7 @@ namespace Contracts.BusinessLayer.Users
     public interface IUserLogic
     {
         Task<UserDto> Register(UserDto newUser);
+
+        string GenerateToken(string email);
     }
 }
