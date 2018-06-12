@@ -7,6 +7,6 @@ namespace Contracts.BusinessLayer.Users
     {
         Task<UserDto> Register(UserDto newUser);
 
-        string GenerateToken(string email);
+        string GenerateToken(int userId, string email);
     }
 }

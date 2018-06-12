@@ -3,6 +3,7 @@ using Entities.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace TerryPoolApi.Controllers
 {
@@ -31,12 +32,13 @@ namespace TerryPoolApi.Controllers
 
         [Route("register")]
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<UserDto> Register(UserDto user)
         {
-            await _userManagementService.Register(user);
+            //var claims = User.Claims.ToList();
+            //var test = claims[1].Value;
 
-            user.Token = _userManagementService.GenerateToken(user.Email);
+            await _userManagementService.Register(user);
 
             return user;
         }

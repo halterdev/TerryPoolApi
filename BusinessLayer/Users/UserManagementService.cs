@@ -1,9 +1,12 @@
 ﻿using Contracts.BusinessLayer.Users;
 using Contracts.DataLayer.Users;
 using Entities.Users;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,17 +28,27 @@ namespace BusinessLayer.Users
             await _userRepository.InsertAsync(user);
 
             newUser.Id = user.Id;
+            newUser.Token = GenerateToken(user.Id, user.Email);
 
             return newUser;
         }
 
-        public string GenerateToken(string email)
+        public string GenerateToken(int userId, string email)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("auT68Dff3RtcHe34"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            IdentityOptions _options = new IdentityOptions();
+
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(_options.ClaimsIdentity.UserIdClaimType, userId.ToString())
+            };
+
             var token = new JwtSecurityToken("http://localhost:4200",
               "http://localhost:4200",
+              claims: claims,
               expires: DateTime.Now.AddMinutes(30),
               signingCredentials: creds);
 
