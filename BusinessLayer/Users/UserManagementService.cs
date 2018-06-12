@@ -48,10 +48,15 @@ namespace BusinessLayer.Users
             {
                 Id = userDto.Id,
                 Email = userDto.Email,
-                Password = userDto.Password
+                Password = GetPasswordHash(userDto.Password)
             };
 
             return user;
+        }
+
+        private string GetPasswordHash(string password)
+        {
+            return PasswordHasher.Hash(password);
         }
     }
 }
