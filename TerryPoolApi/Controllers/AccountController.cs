@@ -31,7 +31,7 @@ namespace TerryPoolApi.Controllers
 
         [Route("register")]
         [HttpPost]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<UserDto> Register(UserDto user)
         {
             await _userManagementService.Register(user);

@@ -47,7 +47,8 @@ namespace BusinessLayer.Users
             User user = new User()
             {
                 Id = userDto.Id,
-                Email = userDto.Email
+                Email = userDto.Email,
+                Password = userDto.Password
             };
 
             return user;
