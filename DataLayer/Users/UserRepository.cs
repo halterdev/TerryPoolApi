@@ -4,7 +4,6 @@ using Entities.Users;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace DataLayer.Users
 {
