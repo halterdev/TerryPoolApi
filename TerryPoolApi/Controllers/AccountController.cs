@@ -20,19 +20,19 @@ namespace TerryPoolApi.Controllers
             _userManagementService = userLogic;
         }
 
-        //[Route("/token")]
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    //return new ObjectResult(GenerateToken("test"));
-        //    //if (IsValidUserAndPasswordCombination(username, password))
-        //      //  return new ObjectResult(GenerateToken(username));
-        //    //return BadRequest();
-        //}
+        [Route("login")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<UserDto> Login(UserDto user)
+        {
+            await _userManagementService.Login(user);
+
+            return user;
+        }
 
         [Route("register")]
         [HttpPost]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<UserDto> Register(UserDto user)
         {
             //var claims = User.Claims.ToList();

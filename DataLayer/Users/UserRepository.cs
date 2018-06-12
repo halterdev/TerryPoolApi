@@ -2,6 +2,9 @@
 using Contracts.DataLayer.Users;
 using Entities.Users;
 using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace DataLayer.Users
 {
@@ -21,6 +24,11 @@ namespace DataLayer.Users
             await _database.SaveChangesAsync();
 
             return user;
+        }
+
+        public async Task<User> GetByEmail(string email)
+        {
+            return await _database.Users.Where(u => u.Email == email).SingleOrDefaultAsync();          
         }
     }
 }

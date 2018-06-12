@@ -6,5 +6,7 @@ namespace Contracts.DataLayer.Users
     public interface IUserRepository
     {
         Task<User> InsertAsync(User user);
+
+        Task<User> GetByEmail(string email);
     }
 }

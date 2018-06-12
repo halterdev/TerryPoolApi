@@ -1,4 +1,5 @@
-﻿using Contracts.BusinessLayer.Users;
+﻿using BusinessLayer.Helpers;
+using Contracts.BusinessLayer.Users;
 using Contracts.DataLayer.Users;
 using Entities.Users;
 using Microsoft.AspNetCore.Identity;
@@ -33,6 +34,39 @@ namespace BusinessLayer.Users
             return newUser;
         }
 
+        public async Task<UserDto> Login(UserDto user)
+        {
+            User loggedInUser = await _userRepository.GetByEmail(user.Email);
+
+            if (loggedInUser != null)
+            {
+                string hashedPassword = PasswordHasher.Hash(user.Password);
+
+                if (PasswordHasher.Verify(user.Password, hashedPassword))
+                {
+                    // hashes match
+                    user.LoginCode = Constants.LOGIN_CODE_SUCCESS;
+                }
+                else
+                {
+                    // wrong password
+                    user.LoginCode = Constants.LOGIN_CODE_INCORRECT_PASSWORD;
+                }
+            }
+            else
+            {
+                // email doesn't exist
+                user.LoginCode = Constants.LOGIN_CODE_EMAIL_DOES_NOT_EXIST;
+            }
+
+            if(user.LoginCode == Constants.LOGIN_CODE_SUCCESS)
+            {
+                user.Token = GenerateToken(loggedInUser.Id, loggedInUser.Email);
+            }
+
+            return user;
+        }
+
         public string GenerateToken(int userId, string email)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("auT68Dff3RtcHe34"));
@@ -61,15 +95,10 @@ namespace BusinessLayer.Users
             {
                 Id = userDto.Id,
                 Email = userDto.Email,
-                Password = GetPasswordHash(userDto.Password)
+                Password = PasswordHasher.Hash(userDto.Password)
             };
 
             return user;
-        }
-
-        private string GetPasswordHash(string password)
-        {
-            return PasswordHasher.Hash(password);
         }
     }
 }
