@@ -1,6 +1,7 @@
 ﻿using Contracts.BusinessLayer.Seasons;
 using Contracts.DataLayer.Seasons;
 using Entities.Seasons;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BusinessLayer.Seasons
@@ -19,6 +20,11 @@ namespace BusinessLayer.Seasons
             await _seasonRepository.InsertAsync(season);
 
             return season;
+        }
+
+        public async Task<List<Season>> Get()
+        {
+            return await _seasonRepository.Get();
         }
     }
 }

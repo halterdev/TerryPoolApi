@@ -2,6 +2,7 @@
 using Entities.Seasons;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace TerryPoolApi.Controllers
@@ -27,6 +28,14 @@ namespace TerryPoolApi.Controllers
             await _seasonManagementService.Add(s);
 
             return s;
+        }
+
+        [Route("get")]
+        [HttpGet]
+        [Authorize]
+        public async Task<List<Season>> Get()
+        {
+            return await _seasonManagementService.Get();
         }
 
         private Season ConvertSeasonDtoToSeason(SeasonDto seasonDto)

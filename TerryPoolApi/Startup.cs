@@ -1,12 +1,17 @@
 ﻿using BusinessLayer;
 using BusinessLayer.Seasons;
+using BusinessLayer.Teams;
 using BusinessLayer.Users;
 using Contracts.BusinessLayer.Seasons;
+using Contracts.BusinessLayer.Teams;
 using Contracts.BusinessLayer.Users;
 using Contracts.DataLayer;
 using Contracts.DataLayer.Seasons;
+using Contracts.DataLayer.Teams;
 using Contracts.DataLayer.Users;
+using DataLayer;
 using DataLayer.Seasons;
+using DataLayer.Teams;
 using DataLayer.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -69,9 +74,11 @@ namespace TerryPoolApi
             services.AddTransient<ITerryPoolDbContext, TerryPoolDbContext>();
 
             services.AddTransient<ISeasonManagementService, SeasonManagementService>();
+            services.AddTransient<ITeamManagementService, TeamManagementService>();
             services.AddTransient<IUserManagementService, UserManagementService>();
 
             services.AddTransient<ISeasonRepository, SeasonRepository>();
+            services.AddTransient<ITeamRepository, TeamRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
         }
 
