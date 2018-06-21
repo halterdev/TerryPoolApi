@@ -1,15 +1,19 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Games;
 using BusinessLayer.Seasons;
 using BusinessLayer.Teams;
 using BusinessLayer.Users;
+using Contracts.BusinessLayer.Games;
 using Contracts.BusinessLayer.Seasons;
 using Contracts.BusinessLayer.Teams;
 using Contracts.BusinessLayer.Users;
 using Contracts.DataLayer;
+using Contracts.DataLayer.Games;
 using Contracts.DataLayer.Seasons;
 using Contracts.DataLayer.Teams;
 using Contracts.DataLayer.Users;
 using DataLayer;
+using DataLayer.Games;
 using DataLayer.Seasons;
 using DataLayer.Teams;
 using DataLayer.Users;
@@ -73,10 +77,13 @@ namespace TerryPoolApi
 
             services.AddTransient<ITerryPoolDbContext, TerryPoolDbContext>();
 
+            services.AddTransient<IAddGameService, AddGameService>();
+            services.AddTransient<IRetrieveGameService, RetrieveGameService>();
             services.AddTransient<ISeasonManagementService, SeasonManagementService>();
             services.AddTransient<ITeamManagementService, TeamManagementService>();
             services.AddTransient<IUserManagementService, UserManagementService>();
 
+            services.AddTransient<IGameRepository, GameRepository>();
             services.AddTransient<ISeasonRepository, SeasonRepository>();
             services.AddTransient<ITeamRepository, TeamRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
