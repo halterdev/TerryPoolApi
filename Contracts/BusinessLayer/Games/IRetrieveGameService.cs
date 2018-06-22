@@ -6,6 +6,6 @@ namespace Contracts.BusinessLayer.Games
 {
     public interface IRetrieveGameService
     {
-        Task<List<Game>> Get(int seasonId, int week);
+        Task<List<Game>> Get(int weekId);
     }
 }

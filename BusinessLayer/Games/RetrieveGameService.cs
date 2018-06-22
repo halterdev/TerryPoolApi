@@ -15,9 +15,9 @@ namespace BusinessLayer.Games
             _gameRepository = gameRepository;
         }
 
-        public async Task<List<Game>> Get(int seasonId, int week)
+        public async Task<List<Game>> Get(int weekId)
         {
-            return await _gameRepository.Get(seasonId, week);
+            return await _gameRepository.Get(weekId);
         }
     }
 }

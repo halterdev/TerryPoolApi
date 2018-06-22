@@ -3,20 +3,24 @@ using BusinessLayer.Games;
 using BusinessLayer.Seasons;
 using BusinessLayer.Teams;
 using BusinessLayer.Users;
+using BusinessLayer.Weeks;
 using Contracts.BusinessLayer.Games;
 using Contracts.BusinessLayer.Seasons;
 using Contracts.BusinessLayer.Teams;
 using Contracts.BusinessLayer.Users;
+using Contracts.BusinessLayer.Weeks;
 using Contracts.DataLayer;
 using Contracts.DataLayer.Games;
 using Contracts.DataLayer.Seasons;
 using Contracts.DataLayer.Teams;
 using Contracts.DataLayer.Users;
+using Contracts.DataLayer.Weeks;
 using DataLayer;
 using DataLayer.Games;
 using DataLayer.Seasons;
 using DataLayer.Teams;
 using DataLayer.Users;
+using DataLayer.Weeks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -82,11 +86,13 @@ namespace TerryPoolApi
             services.AddTransient<ISeasonManagementService, SeasonManagementService>();
             services.AddTransient<ITeamManagementService, TeamManagementService>();
             services.AddTransient<IUserManagementService, UserManagementService>();
+            services.AddTransient<IWeekManagementService, WeekManagementService>();
 
             services.AddTransient<IGameRepository, GameRepository>();
             services.AddTransient<ISeasonRepository, SeasonRepository>();
             services.AddTransient<ITeamRepository, TeamRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IWeekRepository, WeekRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

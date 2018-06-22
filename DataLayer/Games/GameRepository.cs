@@ -17,9 +17,13 @@ namespace DataLayer.Games
             _database = database;
         }
 
-        public async Task<List<Game>> Get(int seasonId, int week)
+        public async Task<List<Game>> Get(int weekId)
         {
-            return await _database.Games.Where(g => g.SeasonId == seasonId && g.Week == week).ToListAsync();
+            return await _database.Games.Where(g => g.WeekId == weekId)
+                .Include(g => g.AwayTeam)
+                .Include(g => g.HomeTeam)
+                .Include(g => g.Week)
+                .ToListAsync();
         }
 
         public async Task Insert(Game game)

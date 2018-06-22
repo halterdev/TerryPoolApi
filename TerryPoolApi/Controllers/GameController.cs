@@ -35,12 +35,12 @@ namespace TerryPoolApi.Controllers
             await _addGameService.Add(games);
         }
 
-        [Route("get/{seasonId}/{week}")]
+        [Route("get/{weekId}")]
         [HttpGet]
         [Authorize]
-        public async Task<List<GameDto>> Get(int seasonId, int week)
+        public async Task<List<GameDto>> Get(int weekId)
         {
-            List<Game> games = await _retrieveGameService.Get(seasonId, week);
+            List<Game> games = await _retrieveGameService.Get(weekId);
 
             List<GameDto> gameDtos = new List<GameDto>();
 
@@ -57,8 +57,7 @@ namespace TerryPoolApi.Controllers
             Game game = new Game()
             {
                 Id = gameDto.Id,
-                SeasonId = gameDto.SeasonId,
-                Week = gameDto.Week,
+                WeekId = gameDto.WeekId,
                 AwayTeamId = gameDto.AwayTeamId,
                 HomeTeamId = gameDto.HomeTeamId
             };
@@ -71,10 +70,20 @@ namespace TerryPoolApi.Controllers
             GameDto dto = new GameDto()
             {
                 Id = game.Id,
-                SeasonId = game.SeasonId,
-                Week = game.Week,
-                AwayTeamId = game.AwayTeamId,
-                HomeTeamId = game.HomeTeamId
+                WeekId = game.WeekId,
+                WeekNum = game.Week.WeekNum,
+                AwayTeam = new Entities.Teams.TeamDto()
+                {
+                    Id = game.AwayTeam.Id,
+                    City = game.AwayTeam.City,
+                    Nickname = game.AwayTeam.Nickname
+                },
+                HomeTeam = new Entities.Teams.TeamDto()
+                {
+                    Id = game.HomeTeam.Id,
+                    City = game.HomeTeam.City,
+                    Nickname = game.HomeTeam.Nickname
+                }
             };
 
             return dto;

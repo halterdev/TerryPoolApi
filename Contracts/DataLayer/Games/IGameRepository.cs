@@ -6,7 +6,7 @@ namespace Contracts.DataLayer.Games
 {
     public interface IGameRepository
     {
-        Task<List<Game>> Get(int seasonId, int week);
+        Task<List<Game>> Get(int weekId);
         Task Insert(Game game);
 
         Task<int> SaveChangesAsync();

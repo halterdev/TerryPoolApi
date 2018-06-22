@@ -1,4 +1,5 @@
 ﻿using Contracts.DataLayer;
+using Entities;
 using Entities.Games;
 using Entities.Seasons;
 using Entities.Teams;
@@ -16,6 +17,7 @@ namespace DataLayer
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Week> Weeks { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {
