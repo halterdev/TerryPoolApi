@@ -85,6 +85,7 @@ namespace TerryPoolApi
             services.AddTransient<IRetrieveGameService, RetrieveGameService>();
             services.AddTransient<ISeasonManagementService, SeasonManagementService>();
             services.AddTransient<ITeamManagementService, TeamManagementService>();
+            services.AddTransient<IUpdateUserSelectionService, UpdateUserSelectionService>();
             services.AddTransient<IUserManagementService, UserManagementService>();
             services.AddTransient<IWeekManagementService, WeekManagementService>();
 
@@ -92,6 +93,7 @@ namespace TerryPoolApi
             services.AddTransient<ISeasonRepository, SeasonRepository>();
             services.AddTransient<ITeamRepository, TeamRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserSelectionRepository, UserSelectionRepository>();
             services.AddTransient<IWeekRepository, WeekRepository>();
         }
 

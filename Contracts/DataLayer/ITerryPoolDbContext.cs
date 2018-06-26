@@ -14,6 +14,7 @@ namespace Contracts.DataLayer
         DbSet<Season> Seasons { get; set; }
         DbSet<Team> Teams { get; set; }
         DbSet<User> Users { get; set; }
+        DbSet<UserSelection> UserSelections { get; set; }
         DbSet<Week> Weeks { get; set; }
 
         Task<int> SaveChangesAsync();
