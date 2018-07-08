@@ -5,6 +5,6 @@ namespace Contracts.DataLayer.Users
 {
     public interface IUpdateUserSelectionService
     {
-        Task Add(UserSelection userSelection);
+        Task Upsert(UserSelection userSelection);
     }
 }

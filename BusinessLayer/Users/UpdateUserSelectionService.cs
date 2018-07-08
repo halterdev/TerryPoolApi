@@ -13,9 +13,22 @@ namespace BusinessLayer.Users
             _userSelectionRepository = userSelectionRepository;
         }
 
-        public async Task Add(UserSelection userSelection)
+        public async Task Upsert(UserSelection userSelection)
         {
-            await _userSelectionRepository.Insert(userSelection);
+            UserSelection existingSelection = 
+                await _userSelectionRepository.Get(userSelection.WeekId, userSelection.UserId);
+
+            if(existingSelection == null)
+            {
+                // user's first pick for this week
+                await _userSelectionRepository.Insert(userSelection);
+            }
+            else
+            {
+                // updating a pick
+                existingSelection.TeamId = userSelection.TeamId;
+            }
+
             await _userSelectionRepository.SaveChangesAsync();
         }
     }

@@ -7,6 +7,8 @@ namespace Contracts.DataLayer.Users
     {
         Task Insert(UserSelection userSelection);
 
+        Task<UserSelection> Get(int weekId, int userId);
+
         Task<int> SaveChangesAsync();
     }
 }
