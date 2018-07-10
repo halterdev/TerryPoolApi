@@ -24,10 +24,12 @@ namespace Entities.Games
     {
         public int Id { get; set; }
         public int WeekId { get; set; }
-        public int WeekNum { get; set; }
         public int AwayTeamId { get; set; }
         public int HomeTeamId { get; set; }
         public TeamDto AwayTeam { get; set; }
         public TeamDto HomeTeam { get; set; }
+        public WeekDto Week { get; set; }
+        public int AwayScore { get; set; }
+        public int HomeScore { get; set; }
     }
 }

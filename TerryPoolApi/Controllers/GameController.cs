@@ -71,7 +71,6 @@ namespace TerryPoolApi.Controllers
             {
                 Id = game.Id,
                 WeekId = game.WeekId,
-                WeekNum = game.Week.WeekNum,
                 AwayTeam = new Entities.Teams.TeamDto()
                 {
                     Id = game.AwayTeam.Id,

@@ -81,6 +81,7 @@ namespace TerryPoolApi
 
             services.AddTransient<ITerryPoolDbContext, TerryPoolDbContext>();
 
+            services.AddTransient<IAddGameResultService, AddGameResultService>();
             services.AddTransient<IAddGameService, AddGameService>();
             services.AddTransient<IGetUserSelectionService, GetUserSelectionService>();
             services.AddTransient<IRetrieveGameService, RetrieveGameService>();
@@ -90,6 +91,7 @@ namespace TerryPoolApi
             services.AddTransient<IUserManagementService, UserManagementService>();
             services.AddTransient<IWeekManagementService, WeekManagementService>();
 
+            services.AddTransient<IGameResultRepository, GameResultRepository>();
             services.AddTransient<IGameRepository, GameRepository>();
             services.AddTransient<ISeasonRepository, SeasonRepository>();
             services.AddTransient<ITeamRepository, TeamRepository>();

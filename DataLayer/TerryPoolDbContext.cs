@@ -13,6 +13,7 @@ namespace DataLayer
     {
         public TerryPoolDbContext(DbContextOptions options) : base(options) { }
 
+        public DbSet<GameResult> GameResults { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Team> Teams { get; set; }

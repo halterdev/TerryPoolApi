@@ -10,6 +10,7 @@ namespace Contracts.DataLayer
 {
     public interface ITerryPoolDbContext
     {
+        DbSet<GameResult> GameResults { get; set; }
         DbSet<Game> Games { get; set; }
         DbSet<Season> Seasons { get; set; }
         DbSet<Team> Teams { get; set; }
